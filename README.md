@@ -41,6 +41,39 @@ Kategorie (1) ──< (n) Rezept (1) ──< (n) Zutat
 Details und SQL-Skript siehe `01_schema.sql`.
 
 
+## Architektur
+
+Die Anwendung folgt dem  **MVC-Muster (Model-View-Controller)** :
+
+* **Model** (`model/`) – reine Datenklassen ohne Logik: `Rezept`, `Zutat`, `Kategorie`
+* **View** (`resources/fxml/`, `resources/style.css`) – JavaFX-FXML-Layouts und zentrales Stylesheet
+* **Controller** (`controller/`) – verarbeitet Benutzerinteraktionen, verbindet View und Model/DAO-Schicht
+* **DAO-Schicht** (`dao/`) – kapselt sämtliche JDBC-/SQL-Zugriffe, trennt Datenbanklogik von der GUI
+
+Zusätzlich gibt es eine **Utility-Schicht** (`util/`) mit wiederverwendbaren Hilfsklassen (`AlertUtil`, `MengeFormatter`), die keiner der klassischen MVC-Schichten direkt zugeordnet sind.
+
+
+## Projektstruktur
+
+```
+src/main/java/com/cnr/kochrezepte/
+├── Main.java              	Einstiegspunkt (JavaFX Application)
+├── model/                 	Rezept, Zutat, Kategorie
+├── dao/                   	DBConnection, RezeptDAO, ZutatDAO, KategorieDAO
+├── controller/            	MainController, RezeptListController,
+│                          	RezeptFormController, KategorieController
+└── util/                  	AlertUtil, MengeFormatter
+
+src/main/resources/
+├── fxml/                  	main.fxml, rezept-liste.fxml,
+│                          	rezept-form.fxml, kategorie.fxml
+├── style.css              	zentrales Stylesheet (Dark Theme)
+└── db/
+    ├── db.properties.example
+    └── db.properties      	(lokal, nicht versioniert)
+```
+
+
 ## Überblick
 
 Java-Desktop-Anwendung zur Verwaltung von Kochrezepten (Anlegen, Suchen,
