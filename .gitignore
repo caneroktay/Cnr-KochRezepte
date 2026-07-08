@@ -6,7 +6,7 @@ target/
 .settings/
 .classpath
 .project
-.CNR_Doku
+CNR_Doku
 .DS_Store
 Thumbs.db
-.github/modernize/
+github/modernize/

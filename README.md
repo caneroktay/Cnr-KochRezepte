@@ -24,8 +24,6 @@ Das Programm soll Benutzern ermöglichen, Kochrezepte einfach zu verwalten. Die 
 | Build-Tool    | Maven                    | 3.9.x   |
 | Styling       | CSS (JavaFX-Stylesheet)  | –      |
 
-
-
 ### Datenbankschema
 
 Drei normalisierte Tabellen (3NF), über Fremdschlüssel verbunden:
@@ -42,7 +40,6 @@ Kategorie (1) ──< (n) Rezept (1) ──< (n) Zutat
 
 Details und SQL-Skript siehe `01_schema.sql`.
 
-
 ### Architektur
 
 Die Anwendung folgt dem  **MVC-Muster (Model-View-Controller)** :
@@ -53,7 +50,6 @@ Die Anwendung folgt dem  **MVC-Muster (Model-View-Controller)** :
 * **DAO-Schicht** (`dao/`) – kapselt sämtliche JDBC-/SQL-Zugriffe, trennt Datenbanklogik von der GUI
 
 Zusätzlich gibt es eine **Utility-Schicht** (`util/`) mit wiederverwendbaren Hilfsklassen (`AlertUtil`, `MengeFormatter`), die keiner der klassischen MVC-Schichten direkt zugeordnet sind.
-
 
 ### Projektstruktur
 
@@ -99,7 +95,6 @@ mvn javafx:run
 Voraussetzung: MySQL-Datenbank via `01_schema.sql` angelegt und
 `db.properties` (aus `db.properties.example` kopiert) mit eigenen
 Zugangsdaten befüllt.
-
 
 ## Bekannte Einschränkungen / mögliche Erweiterungen
 
