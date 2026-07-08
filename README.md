@@ -17,14 +17,16 @@ Das Programm soll Benutzern ermöglichen, Kochrezepte einfach zu verwalten. Die 
 
 | Komponente    | Technologie              | Version |
 | ------------- | ------------------------ | ------- |
-| Sprache       | Java                     | 21      |
-| GUI-Framework | JavaFX (Controls + FXML) | 21.0.2  |
+| Sprache       | Java                     | 25.x    |
+| GUI-Framework | JavaFX (Controls + FXML) | 21.x    |
 | Datenbank     | MySQL                    | 8.x     |
 | JDBC-Treiber  | mysql-connector-j        | 8.3.0   |
-| Build-Tool    | Maven                    | –      |
+| Build-Tool    | Maven                    | 3.9.x   |
 | Styling       | CSS (JavaFX-Stylesheet)  | –      |
 
-## Datenbankschema
+
+
+### Datenbankschema
 
 Drei normalisierte Tabellen (3NF), über Fremdschlüssel verbunden:
 
@@ -41,7 +43,7 @@ Kategorie (1) ──< (n) Rezept (1) ──< (n) Zutat
 Details und SQL-Skript siehe `01_schema.sql`.
 
 
-## Architektur
+### Architektur
 
 Die Anwendung folgt dem  **MVC-Muster (Model-View-Controller)** :
 
@@ -53,7 +55,7 @@ Die Anwendung folgt dem  **MVC-Muster (Model-View-Controller)** :
 Zusätzlich gibt es eine **Utility-Schicht** (`util/`) mit wiederverwendbaren Hilfsklassen (`AlertUtil`, `MengeFormatter`), die keiner der klassischen MVC-Schichten direkt zugeordnet sind.
 
 
-## Projektstruktur
+### Projektstruktur
 
 ```
 src/main/java/com/cnr/kochrezepte/
@@ -73,6 +75,37 @@ src/main/resources/
     └── db.properties      	(lokal, nicht versioniert)
 ```
 
+### Verwendete Entwurfsmuster
+
+* **DAO-Pattern** : jede Entität hat eine eigene DAO-Klasse mit CRUD-Methoden;
+  GUI-Controller sprechen nie direkt SQL.
+* **Single-Row-Mapping** : eine private `mapRow(ResultSet)`-Methode wandelt
+  genau eine Zeile in genau ein Objekt um; `findById()` nutzt sie einmalig,
+  `findAll()`/`search()` iterativ – kein doppelter Code.
+* **Transaktionen** : `RezeptDAO.insert()` verwendet eine explizite
+  Transaktion (`commit()`/`rollback()`), da Rezept und seine Zutaten
+  atomar (alles oder nichts) gespeichert werden müssen.
+
+---
+
+### Build & Ausführung
+
+bash
+
+```bash
+mvn javafx:run
+```
+
+Voraussetzung: MySQL-Datenbank via `01_schema.sql` angelegt und
+`db.properties` (aus `db.properties.example` kopiert) mit eigenen
+Zugangsdaten befüllt.
+
+
+## Bekannte Einschränkungen / mögliche Erweiterungen
+
+* Kein Rezeptbild-Upload (Vielleicht wird dies in einer mobilen Version berücksichtigt.) 😊
+* Keine Mehrbenutzer-Synchronisation (Single-User-Desktop-Anwendung)
+* Keine automatisierten Unit-Tests
 
 ## Überblick
 
