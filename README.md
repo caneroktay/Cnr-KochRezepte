@@ -1,5 +1,9 @@
 # CNR-Kochrezepte
 
+
+
+![AppImage](app_image.png)
+
 ---
 
 ### Ziel des Systems
