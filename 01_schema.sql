@@ -1,0 +1,36 @@
+CREATE DATABASE IF NOT EXISTS cnr_kochrezepte
+    CHARACTER SET utf8mb4
+    COLLATE utf8mb4_unicode_ci;
+
+USE cnr_kochrezepte;
+
+-- nur fuer wiederholtes Testen
+DROP TABLE IF EXISTS Zutat;
+DROP TABLE IF EXISTS Rezept;
+DROP TABLE IF EXISTS Kategorie;
+
+CREATE TABLE Kategorie (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE Rezept (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Titel VARCHAR(100) NOT NULL,
+    Beschreibung TEXT,
+    Zubereitung TEXT,
+    KategorieID INT,
+    Zubereitungszeit INT,
+    ErstelltAm DATETIME DEFAULT CURRENT_TIMESTAMP,
+    GeaendertAm DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (KategorieID) REFERENCES Kategorie(ID) ON DELETE SET NULL
+);
+
+CREATE TABLE Zutat (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    RezeptID INT NOT NULL,
+    Name VARCHAR(100) NOT NULL,
+    Menge DECIMAL(6,2),
+    Einheit VARCHAR(20),
+    FOREIGN KEY (RezeptID) REFERENCES Rezept(ID) ON DELETE CASCADE
+);
