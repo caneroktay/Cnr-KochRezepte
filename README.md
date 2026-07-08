@@ -1,7 +1,5 @@
 # CNR-Kochrezepte
 
-
-
 ![AppImage](app_image.png)
 
 ---
@@ -19,14 +17,21 @@ Das Programm soll Benutzern ermöglichen, Kochrezepte einfach zu verwalten. Die 
 
 ### Technologie-Stack
 
-| Komponente    | Technologie              | Version |
-| ------------- | ------------------------ | ------- |
-| Sprache       | Java                     | 25.x    |
-| GUI-Framework | JavaFX (Controls + FXML) | 21.x    |
-| Datenbank     | MySQL                    | 8.x     |
-| JDBC-Treiber  | mysql-connector-j        | 8.3.0   |
-| Build-Tool    | Maven                    | 3.9.x   |
-| Styling       | CSS (JavaFX-Stylesheet)  | –      |
+| Komponente            | Technologie                                                                                   | Version |
+| --------------------- | --------------------------------------------------------------------------------------------- | ------- |
+| Sprache               | Java                                                                                          | 25.x    |
+| GUI-Framework         | JavaFX (Controls + FXML)                                                                      | 21.x    |
+| Datenbank             | MySQL                                                                                         | 8.x     |
+| JDBC-Treiber          | mysql-connector-j                                                                             | 8.3.0   |
+| Build-Tool            | Maven                                                                                         | 3.9.x   |
+| Styling               | CSS (JavaFX-Stylesheet)                                                                       | –      |
+| Entwicklungsumgebung  | VS Code<br />Extensions:<br />- vscjava.vscode-java-pack<br />- cweijan.vscode-mysql-client2 | –      |
+| Betriebssystem        | MacOS                                                                                         | 26.5.2  |
+| Lokale Serverumgebung | ServBay (MySQL Stack)                                                                         | 1.31.0  |
+
+---
+
+
 
 ### Datenbankschema
 
@@ -44,6 +49,8 @@ Kategorie (1) ──< (n) Rezept (1) ──< (n) Zutat
 
 Details und SQL-Skript siehe `01_schema.sql`.
 
+
+
 ### Architektur
 
 Die Anwendung folgt dem  **MVC-Muster (Model-View-Controller)** :
@@ -54,6 +61,8 @@ Die Anwendung folgt dem  **MVC-Muster (Model-View-Controller)** :
 * **DAO-Schicht** (`dao/`) – kapselt sämtliche JDBC-/SQL-Zugriffe, trennt Datenbanklogik von der GUI
 
 Zusätzlich gibt es eine **Utility-Schicht** (`util/`) mit wiederverwendbaren Hilfsklassen (`AlertUtil`, `MengeFormatter`), die keiner der klassischen MVC-Schichten direkt zugeordnet sind.
+
+
 
 ### Projektstruktur
 
