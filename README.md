@@ -24,8 +24,6 @@ Das Programm soll Benutzern ermöglichen, Kochrezepte einfach zu verwalten. Die 
 | Build-Tool    | Maven                    | –      |
 | Styling       | CSS (JavaFX-Stylesheet)  | –      |
 
-
-
 ## Datenbankschema
 
 Drei normalisierte Tabellen (3NF), über Fremdschlüssel verbunden:
@@ -43,12 +41,7 @@ Kategorie (1) ──< (n) Rezept (1) ──< (n) Zutat
 Details und SQL-Skript siehe `01_schema.sql`.
 
 
-
-
-
-
 ## Überblick
 
 Java-Desktop-Anwendung zur Verwaltung von Kochrezepten (Anlegen, Suchen,
-Anzeigen, Bearbeiten, Löschen). Entwickelt im Rahmen der IHK-Ausbildung
-Fachinformatiker Anwendungsentwicklung (Lernfeld LF-ZQ19A).
+Anzeigen, Bearbeiten, Löschen). Entwickelt im Rahmen der Fachinformatiker Anwendungsentwicklung (Lernfeld LF-ZQ19A).
