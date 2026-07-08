@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.cnr.kochrezepte.controller.RezeptFormController"
+            fitToWidth="true"
+            styleClass="transparent-scroll-pane"
+            stylesheets="@../style.css">
+    <VBox spacing="16">
+        <padding>
+            <Insets top="24.0" right="24.0" bottom="24.0" left="24.0"/>
+        </padding>
+
+        <VBox spacing="4">
+            <Label fx:id="formTitelLabel" text="Neues Rezept" styleClass="detail-title">
+                <font>
+                    <Font name="System Bold" size="20.0"/>
+                </font>
+            </Label>
+            <Label text="Pflichtfelder sind mit * markiert." styleClass="detail-info"/>
+        </VBox>
+
+        <VBox spacing="6">
+            <Label text="Titel *" styleClass="section-title"/>
+            <TextField fx:id="titelField"/>
+        </VBox>
+
+        <HBox spacing="16">
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                <Label text="Kategorie" styleClass="section-title"/>
+                <ComboBox fx:id="kategorieBox" maxWidth="Infinity"/>
+            </VBox>
+            <VBox spacing="6">
+                <Label text="Zeit (Minuten)" styleClass="section-title"/>
+                <Spinner fx:id="zeitSpinner" editable="true" prefWidth="110"/>
+            </VBox>
+        </HBox>
+
+        <VBox spacing="6">
+            <Label text="Beschreibung" styleClass="section-title"/>
+            <TextArea fx:id="beschreibungField" prefRowCount="2" wrapText="true"/>
+        </VBox>
+
+        <VBox spacing="6">
+            <Label text="Zubereitung" styleClass="section-title"/>
+            <TextArea fx:id="zubereitungField" prefRowCount="5" wrapText="true"/>
+        </VBox>
+
+        <VBox id="detailPanel" spacing="8">
+            <padding>
+                <Insets top="16.0" right="16.0" bottom="16.0" left="16.0"/>
+            </padding>
+            <Label text="Zutaten" styleClass="section-title"/>
+
+            <HBox spacing="8">
+                <TextField fx:id="neueZutatName" promptText="Name" HBox.hgrow="ALWAYS"/>
+                <TextField fx:id="neueZutatMenge" promptText="Menge" prefWidth="80"/>
+                <TextField fx:id="neueZutatEinheit" promptText="Einheit" prefWidth="80"/>
+                <Button text="+ Hinzufuegen" onAction="#onAddZutat" styleClass="btn-add"/>
+            </HBox>
+
+            <TableView fx:id="zutatenTable" prefHeight="140">
+                <columns>
+                    <TableColumn fx:id="zutatNameColumn" text="Name" prefWidth="200"/>
+                    <TableColumn fx:id="zutatMengeColumn" text="Menge" prefWidth="80"/>
+                    <TableColumn fx:id="zutatEinheitColumn" text="Einheit" prefWidth="80"/>
+                </columns>
+            </TableView>
+
+            <Button text="Ausgewaehlte Zutat entfernen" onAction="#onRemoveZutat" styleClass="btn-delete"/>
+        </VBox>
+
+        <HBox spacing="12" alignment="CENTER_RIGHT">
+            <Button text="Abbrechen" onAction="#onCancel" styleClass="btn-secondary"/>
+            <Button text="Speichern" onAction="#onSave" defaultButton="true" styleClass="btn-add"/>
+        </HBox>
+    </VBox>
+</ScrollPane>

@@ -7,17 +7,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-
-// ======================================================================
-// Erstellt JDBC-Connections auf Basis von db/db.properties.
-// --------------------
-// Bewusst KEIN Singleton: jeder DAO-Aufruf oeffnet ueber getConnection()
-// eine neue Connection und schliesst sie per try-with-resources wieder
-// (siehe RezeptDAO, ZutatDAO, KategorieDAO). Fuer eine Desktop-Anwendung
-// mit wenigen hundert Datensaetzen ist das einfach, sicher (keine
-// "Connection ist bereits geschlossen"-Fehler) und ausreichend performant.
-// ======================================================================
-
+/**
+ * Erstellt JDBC-Connections auf Basis von db/db.properties.
+ *
+ * Bewusst KEIN Singleton: jeder DAO-Aufruf oeffnet ueber getConnection()
+ * eine neue Connection und schliesst sie per try-with-resources wieder
+ * (siehe RezeptDAO, ZutatDAO, KategorieDAO). Fuer eine Desktop-Anwendung
+ * mit wenigen hundert Datensaetzen ist das einfach, sicher (keine
+ * "Connection ist bereits geschlossen"-Fehler) und ausreichend performant.
+ */
 public final class DBConnection {
 
     private DBConnection() {

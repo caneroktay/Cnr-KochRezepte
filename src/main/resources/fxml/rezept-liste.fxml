@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.cnr.kochrezepte.controller.RezeptListController"
+            styleClass="root-pane"
+            stylesheets="@../style.css">
+    <top>
+        <HBox fx:id="topBar" spacing="12" alignment="CENTER_LEFT">
+            <padding>
+                <Insets top="16" right="20" bottom="16" left="20"/>
+            </padding>
+            <TextField fx:id="searchField" promptText="🔍 Titel, Zutat suchen..." prefWidth="240"/>
+            <Button text="Suchen" onAction="#onSearch" styleClass="btn-secondary"/>
+            <ComboBox fx:id="kategorieFilter" promptText="Alle Kategorien" onAction="#onFilterChanged"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="+ Neues Rezept" onAction="#onNewRezept" styleClass="btn-add"/>
+        </HBox>
+    </top>
+    <center>
+        <SplitPane dividerPositions="0.45" styleClass="main-split-pane">
+            <TableView fx:id="tableView">
+                <columns>
+                    <TableColumn fx:id="titelColumn" text="Titel" prefWidth="180"/>
+                    <TableColumn fx:id="kategorieColumn" text="Kategorie" prefWidth="110"/>
+                    <TableColumn fx:id="zeitColumn" text="Zeit (Min.)" prefWidth="90"/>
+                </columns>
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+            </TableView>
+            <VBox fx:id="detailPanel" spacing="14">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label fx:id="detailTitelLabel" styleClass="detail-title"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button text="Bearbeiten" onAction="#onEditRezept" styleClass="btn-secondary"/>
+                    <Button text="Löschen" onAction="#onDeleteRezept" styleClass="btn-delete"/>
+                </HBox>
+                <Label fx:id="detailInfoLabel" styleClass="detail-info"/>
+                <VBox spacing="6">
+                    <Label text="Zutaten" styleClass="section-title"/>
+                    <ListView fx:id="zutatenListView" prefHeight="130"/>
+                </VBox>
+                <VBox spacing="6" VBox.vgrow="ALWAYS">
+                    <Label text="Zubereitung" styleClass="section-title"/>
+                    <TextArea fx:id="zubereitungArea" editable="false" wrapText="true" VBox.vgrow="ALWAYS"/>
+                </VBox>
+            </VBox>
+        </SplitPane>
+    </center>
+</BorderPane>

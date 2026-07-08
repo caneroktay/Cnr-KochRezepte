@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.cnr.kochrezepte.controller.MainController"
+            styleClass="main-root"
+            stylesheets="@../style.css">
+    <left>
+        <VBox fx:id="sideMenu" spacing="8" prefWidth="180">
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets bottom="30.0" left="8.0"/>
+                </padding>
+                <Circle radius="7.0" styleClass="logo-circle"/>
+                <VBox spacing="2">
+                    <Label text="CNR KochRezepte" styleClass="logo-title">
+                        <font>
+                            <Font name="System Bold" size="16.0"/>
+                        </font>
+                    </Label>
+                    <Label text="v1.0" styleClass="logo-version">
+                        <font>
+                            <Font size="11.0"/>
+                        </font>
+                    </Label>
+                </VBox>
+            </HBox>
+            <Label text="DASHBOARD" styleClass="menu-header">
+                <padding>
+                    <Insets left="12.0" bottom="8.0"/>
+                </padding>
+            </Label>
+            <Button fx:id="navRezepteButton" text="🍽   Rezepte" onAction="#onNavRezepte" maxWidth="Infinity" styleClass="nav-button, nav-active">
+                <font>
+                    <Font size="13.0"/>
+                </font>
+            </Button>
+            <Button fx:id="navKategorienButton" text="📁   Kategorien" onAction="#onNavKategorien" maxWidth="Infinity" styleClass="nav-button, nav-inactive">
+                <font>
+                    <Font size="13.0"/>
+                </font>
+            </Button>
+            <VBox VBox.vgrow="ALWAYS" alignment="BOTTOM_LEFT">
+                <padding>
+                    <Insets left="12.0"/>
+                </padding>
+                <Label text="Erstellt von Caner Oktay" styleClass="footer-text"/>
+            </VBox>
+        </VBox>
+    </left>
+    <center>
+        <StackPane fx:id="contentArea" styleClass="main-content-area">
+            <padding>
+                <Insets top="24.0" right="24.0" bottom="24.0" left="24.0"/>
+            </padding>
+            <VBox styleClass="welcome-card" alignment="CENTER" spacing="12">
+                <Label text="Willkommen bei CNR Kochrezepte" styleClass="welcome-title">
+                    <font>
+                        <Font name="System Bold" size="20.0"/>
+                    </font>
+                </Label>
+                <Label text="Wählen Sie links ein Menü, um zu beginnen." styleClass="welcome-subtitle">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Label>
+            </VBox>
+        </StackPane>
+    </center>
+</BorderPane>

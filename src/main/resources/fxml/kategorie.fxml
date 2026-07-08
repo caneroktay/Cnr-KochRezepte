@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.cnr.kochrezepte.controller.KategorieController"
+      styleClass="main-content-area"
+      stylesheets="@../style.css"
+      spacing="16">
+    <padding>
+        <Insets top="24.0" right="24.0" bottom="24.0" left="24.0"/>
+    </padding>
+
+    <HBox id="topBar" alignment="CENTER_LEFT" spacing="12">
+        <padding>
+            <Insets top="14.0" right="16.0" bottom="14.0" left="16.0"/>
+        </padding>
+        <Label text="Kategorien verwalten" styleClass="detail-title">
+            <font>
+                <Font name="System Bold" size="18.0"/>
+            </font>
+        </Label>
+        <Region HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="nameField" promptText="Neue Kategorie" prefWidth="220"/>
+        <Button text="+ Hinzufuegen" onAction="#onAdd" styleClass="btn-add"/>
+    </HBox>
+
+    <VBox id="detailPanel" spacing="8" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets top="16.0" right="16.0" bottom="16.0" left="16.0"/>
+        </padding>
+        <Label text="ALLE KATEGORIEN" styleClass="menu-header"/>
+        <ListView fx:id="kategorieListView" VBox.vgrow="ALWAYS"/>
+        <HBox alignment="CENTER_RIGHT">
+            <Button text="Ausgewaehlte Kategorie loeschen" onAction="#onDelete" styleClass="btn-delete"/>
+        </HBox>
+    </VBox>
+</VBox>
