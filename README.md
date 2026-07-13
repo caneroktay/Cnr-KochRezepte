@@ -31,8 +31,6 @@ Das Programm soll Benutzern ermöglichen, Kochrezepte einfach zu verwalten. Die 
 
 ---
 
-
-
 ### Datenbankschema
 
 Drei normalisierte Tabellen (3NF), über Fremdschlüssel verbunden:
@@ -49,8 +47,6 @@ Kategorie (1) ──< (n) Rezept (1) ──< (n) Zutat
 
 Details und SQL-Skript siehe `01_schema.sql`.
 
-
-
 ### Architektur
 
 Die Anwendung folgt dem  **MVC-Muster (Model-View-Controller)** :
@@ -61,8 +57,6 @@ Die Anwendung folgt dem  **MVC-Muster (Model-View-Controller)** :
 * **DAO-Schicht** (`dao/`) – kapselt sämtliche JDBC-/SQL-Zugriffe, trennt Datenbanklogik von der GUI
 
 Zusätzlich gibt es eine **Utility-Schicht** (`util/`) mit wiederverwendbaren Hilfsklassen (`AlertUtil`, `MengeFormatter`), die keiner der klassischen MVC-Schichten direkt zugeordnet sind.
-
-
 
 ### Projektstruktur
 
@@ -97,17 +91,87 @@ src/main/resources/
 
 ---
 
-### Build & Ausführung
 
-bash
+
+## Installation & Ausführung
+
+### Voraussetzungen
+
+- **Java JDK 25** (oder mindestens 21, kompatibel mit JavaFX 21.x)
+- **Maven 3.9+**
+- **MySQL Server 8.x** (lokal, z. B. über ServBay, XAMPP, Docker oder eine native Installation)
+- **Git**
+
+Vorhandene Installation pruefen:
+
+```bash
+java -version
+mvn -version
+mysql --version
+```
+
+### 1. Repository klonen
+
+```bash
+git clone <repo-url>
+cd cnr-kochrezepte
+```
+
+### 2. Datenbank einrichten
+
+Sicherstellen, dass der MySQL-Server laeuft, dann das Schema anlegen:
+
+```bash
+mysql -u root -p < 01_schema.sql
+```
+
+Dies erstellt die Datenbank `cnr_kochrezepte` mit allen drei Tabellen
+(`Kategorie`, `Rezept`, `Zutat`) sowie Testdaten. Kontrolle:
+
+```bash
+mysql -u root -p -e "USE cnr_kochrezepte; SHOW TABLES;"
+```
+
+### 3. Datenbankzugangsdaten konfigurieren
+
+```bash
+cp src/main/resources/db/db.properties.example src/main/resources/db/db.properties
+```
+
+Anschliessend `db.properties` oeffnen und eigene Zugangsdaten eintragen:
+
+```properties
+db.url=jdbc:mysql://localhost:3306/cnr_kochrezepte?useSSL=false&serverTimezone=UTC
+db.user=root
+db.password=DEIN_PASSWORT
+```
+
+> ⚠️ Diese Datei wird von Git ignoriert (`.gitignore`) und darf **niemals**
+> mit echten Zugangsdaten committet werden.
+
+### 4. Projekt bauen
+
+```bash
+mvn clean compile
+```
+
+Maven laedt beim ersten Aufruf automatisch alle Abhaengigkeiten (JavaFX,
+MySQL-Connector) aus dem Maven Central Repository herunter.
+
+### 5. Anwendung starten
 
 ```bash
 mvn javafx:run
 ```
 
-Voraussetzung: MySQL-Datenbank via `01_schema.sql` angelegt und
-`db.properties` (aus `db.properties.example` kopiert) mit eigenen
-Zugangsdaten befüllt.
+**Alternative ueber die IDE:** Ein direktes Ausfuehren von `Main.java` ueber
+den IDE-"Run"-Button funktioniert **nicht** (siehe Fehlerbehebung unten).
+Stattdessen entweder `mvn javafx:run` im Terminal verwenden, oder
+`MainWrapper.java` als Startklasse in der IDE waehlen.
+
+---
+
+
 
 ## Bekannte Einschränkungen / mögliche Erweiterungen
 
